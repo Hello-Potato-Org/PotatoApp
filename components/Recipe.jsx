@@ -4,7 +4,9 @@ export default function Recipe({recipe}) {
 
     const navigate= useNavigate()
     function handleClick() {
-        navigate(`recipes/${recipe.id}`)
+        
+        console.log(recipe.id);
+        navigate(`/recipes/${recipe.id}`)
     }
 
     return (

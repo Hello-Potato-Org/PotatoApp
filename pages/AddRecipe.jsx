@@ -18,14 +18,14 @@ export default function AddRecipe() {
             uid: "ZfPTVEMQKf9vhNiUh0bj"
         }
 
-    const url = "https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/posts.json"
+    const url = "https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/recipes.json"
     const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(newRecipe)
     });
 
     if (response.ok) {
-    navigate("/")
+    navigate("/recipes")
     } else {
         console.log("Something went wrong")
     }

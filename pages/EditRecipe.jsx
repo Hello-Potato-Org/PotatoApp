@@ -4,20 +4,21 @@ import TopBar from "../components/TopBar";
 import NavBar from "../components/NavBar";
 
 export default function EditRecipe() {
+    console.log("EditRecipe");
     const [recipe, setRecipe] =useState({})
     const [caption, setCaption] = useState("")
     const [image, setImage] = useState("")
     // const [imageFile, setImageFile] =useState("")
     const params =useParams()
     const navigate = useNavigate()
-    const url = `https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/posts/${params.recipeId}.json`
+    const url = `https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/recipes/${params.recipeId}.json`
     
 
     useEffect(() => {
         async function getRecipe() {
             const response = await fetch(url);
-            const data = await response.json()
-            setRecipe(data)
+            const data = await response.json();
+            setRecipe(data);
             console.log(data);
             setCaption(recipe.caption)
             setImage(recipe.image)
@@ -40,7 +41,7 @@ export default function EditRecipe() {
         });
 
         if (response.ok) {
-            navigate("/")
+            navigate("/recipes")
             } else {
                 console.log("Something went wrong")
             }
@@ -52,7 +53,7 @@ export default function EditRecipe() {
         });
 
         if (response.ok) {
-            navigate("/")
+            navigate("/recipes")
             } else {
                 console.log("Something went wrong")
             }
