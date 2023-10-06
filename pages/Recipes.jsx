@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
+import Post from "../components/Post";
 
 export default function Recipes() {
 const[posts, setPosts] =useState([]);
@@ -26,15 +28,4 @@ return (
     <NavBar/>
     </section>
 );
-}
-
-export default function Recipes() {
-    return (
-        <>
-        <section className="page">
-        <h1>Recipes</h1>
-        </section>
-        <NavBar/>
-        </>
-    )
 }

@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import UserAvatar from "./UserAvatar";
 
 export default function Post({post}) {
 
