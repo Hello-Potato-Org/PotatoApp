@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import Post from "../components/Post";
+import Recipe from "../components/Recipe";
+import TopBar from "../components/TopBar";
 
 export default function Recipes() {
-const[posts, setPosts] =useState([]);
+const[recipes, setRecipes] =useState([]);
 
 useEffect(() => {
-    async function getPosts() {
+    async function getRecipes() {
         const url = "https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/posts.json";
         const response = await fetch(url);
         const data = await response.json();
         const postsArray = Object.keys(data).map(key => ({ id: key, ...data[key]}));
-        setPosts(postsArray);
+        setRecipes(postsArray);
     }
-    getPosts();
+    getRecipes();
 
 }, []);
 
 return (
     <section className="page">
-        <h1>Home</h1>
+        <TopBar/>
+        <h1>Recipes</h1>
     <section className="grid">
-        {posts.map(post => (
-            <Post post={post} key={post.id} />
+        {recipes.map(recipe => (
+            <Recipe recipe={recipe} key={recipe.id} />
         ))}
     </section>
     <NavBar/>

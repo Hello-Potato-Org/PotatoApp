@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Post({post}) {
+export default function Recipe({recipe}) {
 
     const navigate= useNavigate()
     function handleClick() {
-        navigate(`posts/${post.id}`)
+        navigate(`recipes/${recipe.id}`)
     }
 
     return (
         <article onClick={handleClick}>
-            <img src={post.image} alt={post.caption} />
-            <h2>{post.caption}</h2>
+            <img src={recipe.image} alt={recipe.caption} />
+            <h2>{recipe.caption}</h2>
         </article>    
         );
 }
