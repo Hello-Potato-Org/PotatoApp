@@ -11,8 +11,8 @@ useEffect(() => {
         const url = "https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/posts.json";
         const response = await fetch(url);
         const data = await response.json();
-        const postsArray = Object.keys(data).map(key => ({ id: key, ...data[key]}));
-        setRecipes(postsArray);
+        const recipesArray = Object.keys(data).map(key => ({ id: key, ...data[key]}));
+        setRecipes(recipesArray);
     }
     getRecipes();
 
