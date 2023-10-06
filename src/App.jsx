@@ -7,6 +7,7 @@ import Recipes from "../pages/Recipes";
 import AddRecipe from "../pages/AddRecipe";
 import EditRecipe from "../pages/EditRecipe";
 import MealPlan from "../pages/MealPlan";
+import Commodities from "../pages/Commodities";
 function App() {
 
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/recipes" element={<Recipes/>} />
                 <Route path="/addrecipe" element={<AddRecipe/>} />
                 <Route path="/recipes/:recipeId" element={<EditRecipe/>} />
+                <Route path="/commodities" element={<Commodities/>} />
                 <Route path="*" element={<Navigate to="/home" />} />
             </Routes>
         </main>
