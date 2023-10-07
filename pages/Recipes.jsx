@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import Recipe from "../components/Recipe";
+import Recipe from "../components/RecipeCard";
 import TopBar from "../components/TopBar";
 import { Link } from "react-router-dom";
 
@@ -29,8 +29,10 @@ return (
             <Recipe recipe={recipe} key={recipe.id} />
         ))}
     </section>
-    <Link className="addRecipeButton" to="/addrecipe">Add recipe</Link>
     </section>
+    <div className="buttonContainer">
+    <Link className="addRecipeButton" to="/addrecipe">Add recipe</Link>
+    </div>
     <NavBar/>
     </>
 );

@@ -93,7 +93,7 @@ export default function EditRecipe() {
                             onChange={event=> setCaption (event.target.value)}>
                         </input>
 
-                        <button classname="button">Save</button>
+                        <button className="button">Save</button>
 
                     </form>
                     <button className="button" onClick={deleteRecipe}>Delete</button>

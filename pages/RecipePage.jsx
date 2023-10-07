@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import TopBar from "../components/TopBar";
 import NavBar from "../components/NavBar";
 
@@ -33,6 +33,7 @@ export default function RecipePage () {
         <section className="page">
                     <h2>{recipe.caption}</h2>
                     <img className="image-preview" src={recipe.image} />
+                    <Link to={"/editrecipe/" + params.recipeId} className="button">Edit</Link>
                     
                     
         </section>
