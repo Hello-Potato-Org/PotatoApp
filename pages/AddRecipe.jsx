@@ -36,26 +36,9 @@ export default function AddRecipe() {
         <TopBar/>
         <section className="page">
 
-            <h1>Add Recipe</h1>
+            <h2>Add Recipe</h2>
             <form onSubmit={addRecipe}>
 
-                <label>Caption</label>
-                <input 
-                    type="text" 
-                    required
-                    placeholder="Type a caption"
-                    value={caption} 
-                    onChange={event=>setCaption(event.target.value)}>
-                </input>
-
-                <label>Image</label>
-                <input 
-                    type="url" 
-                    required
-                    placeholder="Paste an image url"
-                    value={image} 
-                    onChange={event =>setImage(event.target.value)}>
-                </input>
 
                 {image ? (
                     <img src={image} className="image-preview" alt="Image Preview" />
@@ -66,8 +49,33 @@ export default function AddRecipe() {
                         alt="placeholder"
                         />
                 )}
-   
-                <button>Save</button> 
+
+                <input 
+                    type="url" 
+                    required
+                    placeholder="Paste an image url"
+                    value={image} 
+                    onChange={event =>setImage(event.target.value)}>
+                </input>
+
+                <label>Recipe Name</label>
+                <input 
+                    type="text" 
+                    required
+                    placeholder="Name of the recipe"
+                    value={caption} 
+                    onChange={event=>setCaption(event.target.value)}>
+                </input>
+                <label>Recipe Name</label>
+                <input 
+                    type="text" 
+                    required
+                    placeholder="Name of the recipe"
+                    value={caption} 
+                    onChange={event=>setCaption(event.target.value)}>
+                </input>
+  
+                <button>Add Recipe</button> 
             </form>
         </section>
         <NavBar/>

@@ -8,7 +8,7 @@ export default function HomePage() {
         <TopBar/>
         <section className="page">
         <h1>Hey you!</h1>
-        <h2>What do you want to cook today?</h2>
+        <h3>What do you want to cook today?</h3>
         </section>
         <NavBar/>
         </>

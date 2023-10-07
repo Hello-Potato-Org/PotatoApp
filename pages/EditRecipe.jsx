@@ -63,8 +63,26 @@ export default function EditRecipe() {
         <>
         <TopBar/>
         <section className="page">
-                    <h1>Edit Recipe</h1>
+                    <h2>Edit Recipe</h2>
                     <form onSubmit={handleSubmit}>
+
+
+                    <label>Image</label>
+                        <input 
+                            type="url" 
+                            required
+                            placeholder="Paste an image url"
+                            value={image} 
+                            onChange={event =>setImage(event.target.value)}>
+                        </input>
+
+                    <input 
+                        type="image"
+                        src={image} 
+                        alt="placeholder"
+                        onChange={event =>setImage(event.target.value)}>
+                        </input>
+
 
                         <label>Caption</label>
                         <input 
@@ -75,25 +93,10 @@ export default function EditRecipe() {
                             onChange={event=> setCaption (event.target.value)}>
                         </input>
 
-                        <label>Image</label>
-                        <input 
-                            type="url" 
-                            required
-                            placeholder="Paste an image url"
-                            value={image} 
-                            onChange={event =>setImage(event.target.value)}>
-                        </input>
-
-                        <button>Save</button>
-                        <input 
-                        type="image"
-                        src={image} 
-                        alt="placeholder"
-                        onChange={event =>setImage(event.target.value)}>
-                        </input>
+                        <button classname="button">Save</button>
 
                     </form>
-                    <button onClick={deleteRecipe}>Delete</button>
+                    <button className="button" onClick={deleteRecipe}>Delete</button>
         </section>
         <NavBar/>
         </>
