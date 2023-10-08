@@ -11,8 +11,8 @@ export default function Recipe({recipe}) {
 
     return (
         <article onClick={handleClick}>
-            <img src={recipe.image} alt={recipe.caption} />
-            <h2>{recipe.caption}</h2>
+            <img src={recipe.image} alt={recipe.name} />
+            <h2>{recipe.name}</h2>
         </article>    
         );
 }

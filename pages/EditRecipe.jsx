@@ -6,12 +6,12 @@ import NavBar from "../components/NavBar";
 export default function EditRecipe() {
     console.log("EditRecipe");
     const [recipe, setRecipe] =useState({})
-    const [caption, setCaption] = useState("")
-    const [image, setImage] = useState("")
+    const [name, setName] = useState("")
+    const [imageId, setImageId] = useState("")
     // const [imageFile, setImageFile] =useState("")
     const params =useParams()
     const navigate = useNavigate()
-    const url = `https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/recipes/${params.recipeId}.json`
+    const url = `https://recipeservice.onrender.com/recipes${params.id}`
     
 
     useEffect(() => {
@@ -20,19 +20,19 @@ export default function EditRecipe() {
             const data = await response.json();
             setRecipe(data);
             console.log(data);
-            setCaption(recipe.caption)
-            setImage(recipe.image)
+            setName(recipe.name)
+            setImageId(recipe.imageId)
         }
 
         getRecipe();
-    }, [recipe.caption, recipe.image, url])
+    }, [recipe.name, recipe.imageId, url])
 
 
     async function handleSubmit(event) {
         event.preventDefault();
         const recipeToUpdate = {
-            caption:caption,
-            image:image
+            name:name,
+            imageId:imageId
         }
         
         const response = await fetch(url, {
@@ -69,28 +69,28 @@ export default function EditRecipe() {
 
                     <label>Image</label>
                         <input 
-                            type="url" 
+                            type="number" 
                             required
                             placeholder="Paste an image url"
-                            value={image} 
-                            onChange={event =>setImage(event.target.value)}>
+                            value={imageId} 
+                            onChange={event =>setImageId(event.target.value)}>
                         </input>
 
                     <input 
                         type="image"
-                        src={image} 
+                        src={imageId} 
                         alt="placeholder"
-                        onChange={event =>setImage(event.target.value)}>
+                        onChange={event =>setImageId(event.target.value)}>
                         </input>
 
 
-                        <label>Caption</label>
+                        <label>Recipe Name</label>
                         <input 
                             type="text" 
                             required
-                            placeholder="Type a caption"
-                            value={caption} 
-                            onChange={event=> setCaption (event.target.value)}>
+                            placeholder="Type a name"
+                            value={name} 
+                            onChange={event=> setName (event.target.value)}>
                         </input>
 
                         <button className="button">Save</button>
