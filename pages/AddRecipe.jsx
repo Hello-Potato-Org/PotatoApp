@@ -1,18 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopBar from "../components/TopBar";
 import NavBar from "../components/NavBar";
+import Placeholder from "../src/assets/placeholder-image.png"
 
-export default function AddRecipe() {
+export default function AddRecipe(recipe) {
 
     const [name, setName] = useState("")
     const [imageId, setImageId] = useState("")
-    const [instructions, setInstructions] = useState("")
-    const[servingSize, setServingSize] = useState("")
-    const[categories, setCategories] = useState("")
+    // const [instructions, setInstructions] = useState("")
+    // const[servingSize, setServingSize] = useState("")
+    // const[categories, setCategories] = useState("")
     const navigate =useNavigate()
+    const [errorMessage, setErrorMessage] = useState("")
 
-    async function addRecipe(event) {
+    useEffect(() => {
+        if (recipe) {
+            setName(recipe.name);
+            setImageId(recipe.imageId);
+        }
+    }, [recipe]);
+
+
+        function handleImageChange(event) {
+        const file = event.target.files[0];
+        if (file.size < 200000) {
+            // image file size must be below 0,5MB
+            const reader = new FileReader();
+            reader.onload = event => {
+                setImageId(event.target.result);
+            };
+            reader.readAsDataURL(file);
+            setErrorMessage(""); // reset errorMessage state
+        } else {
+            // if not below 2MB display an error message using the errorMessage state
+            setErrorMessage("The image file is too big!");
+        }
+    }
+
+    async function submitRecipe(event) {
         event.preventDefault()
 
         const newRecipe ={
@@ -24,13 +50,13 @@ export default function AddRecipe() {
     const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(newRecipe)
-    });
+    })
 
-    if (response.ok) {
-    navigate("/recipes")
-    } else {
-        console.log("Something went wrong")
-    }
+        if (response.ok) {
+            navigate("/recipes")
+            } else {
+                console.log("Something went wrong")
+            }
     }
 
     return (
@@ -39,25 +65,23 @@ export default function AddRecipe() {
         <section className="page">
 
             <h2>Add Recipe</h2>
-            <form onSubmit={addRecipe}>
+            <form onSubmit={submitRecipe}>
+            
+            <label>
+            <input
+                    type="file"
+                    className="file-input"
+                    accept="image/*"
+                    onChange={handleImageChange}
+            />
 
-
-                {imageId ? (
-                    <img src={imageId} className="image-preview" alt="Image Preview" />
-                ) : (
-                    <img
-                        src="https://images.unsplash.com/photo-1599009434802-ca1dd09895e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80" 
-                        className="image-preview"
-                        alt="placeholder"
-                        />
-                )}
-
-                <input 
-                    type="number" 
-                    placeholder="Paste an image url"
-                    value={imageId} 
-                    onChange={event =>setImageId(event.target.value)}>
-                </input>
+            <img
+                    className="image-preview"
+                    src={Placeholder}
+                    alt="Choose"
+                    onError={event => (event.target.src = Placeholder)}
+                />
+            </label>
 
                 <label>Recipe Name</label>
                 <input 
@@ -67,7 +91,8 @@ export default function AddRecipe() {
                     value={name} 
                     onChange={event=>setName(event.target.value)}>
                 </input>
-                <label>Serving Size</label>
+
+                {/* /* <label>Serving Size</label>
                 <div className=""></div>
                 <input 
                     type="button" 
@@ -83,12 +108,12 @@ export default function AddRecipe() {
                     placeholder="Name of the recipe"
                     value={instructions} 
                     onChange={event=>setInstructions(event.target.value)}>
-                </input>
+                </input> */}
   
+                <p className="text-error">{errorMessage}</p>
                 <button>Add Recipe</button> 
             </form>
         </section>
         <NavBar/>
         </>
-    );
-}
+    )};

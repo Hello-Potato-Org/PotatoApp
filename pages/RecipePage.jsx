@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 export default function RecipePage () {
     const [recipe, setRecipe] =useState({})
     const params =useParams()
-    const url = `https://recipeservice.onrender.com/recipes${params.recipeId}`
+    const url = `https://recipeservice.onrender.com/recipes/${params.recipeId}`
     
 
     useEffect(() => {
