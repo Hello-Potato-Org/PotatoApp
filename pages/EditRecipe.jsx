@@ -11,7 +11,7 @@ export default function EditRecipe() {
     // const [imageFile, setImageFile] =useState("")
     const params =useParams()
     const navigate = useNavigate()
-    const url = `https://recipeservice.onrender.com/recipes/${params.recipeId}`
+    const url = `https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/recipes/${params.recipeId}`
     
 
     useEffect(() => {

@@ -46,7 +46,7 @@ export default function AddRecipe(recipe) {
             imageId:imageId
         }
 
-    const url = "https://recipeservice.onrender.com/recipes"
+    const url = "https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/recipes.json"
     const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(newRecipe)
@@ -77,7 +77,7 @@ export default function AddRecipe(recipe) {
 
             <img
                     className="image-preview"
-                    src={Placeholder}
+                    src={imageId}
                     alt="Choose"
                     onError={event => (event.target.src = Placeholder)}
                 />

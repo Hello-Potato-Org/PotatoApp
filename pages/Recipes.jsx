@@ -9,7 +9,7 @@ const[recipes, setRecipes] =useState([]);
 
 useEffect(() => {
     async function getRecipes() {
-        const url = "https://recipeservice.onrender.com/recipes";
+        const url = "https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/recipes.json";
         const response = await fetch(url);
         const data = await response.json();
         const recipesArray = Object.keys(data).map(key => ({ id: key, ...data[key]}));
