@@ -8,10 +8,11 @@ export default function AddRecipe(recipe) {
 
     const [name, setName] = useState("")
     const [imageId, setImageId] = useState("")
+    const [imageBytea, setImageBytea] = useState("")
     // const [instructions, setInstructions] = useState("")
     // const[servingSize, setServingSize] = useState("")
     // const[categories, setCategories] = useState("")
-    const navigate =useNavigate()
+    const navigate = useNavigate()
     const [errorMessage, setErrorMessage] = useState("")
 
     useEffect(() => {
@@ -22,15 +23,16 @@ export default function AddRecipe(recipe) {
     }, [recipe]);
 
 
-        function handleImageChange(event) {
+    function handleImageChange(event) {
         const file = event.target.files[0];
         if (file.size < 200000) {
             // image file size must be below 0,5MB
             const reader = new FileReader();
-            reader.onload = event => {
-                setImageId(event.target.result);
-            };
+
             reader.readAsDataURL(file);
+            reader.onload = event => {
+                setImageBytea(event.target.result);
+            };
             setErrorMessage(""); // reset errorMessage state
         } else {
             // if not below 2MB display an error message using the errorMessage state
@@ -46,34 +48,34 @@ export default function AddRecipe(recipe) {
             imageId:imageId
         }
 
-    const url = "https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/recipes.json"
-    const response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(newRecipe)
-    })
+        const url = "https://potato-meal-planner-default-rtdb.europe-west1.firebasedatabase.app/recipes.json"
+        const response = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(newRecipe)
+        })
 
         if (response.ok) {
             navigate("/recipes")
-            } else {
-                console.log("Something went wrong")
-            }
+        } else {
+            console.log("Something went wrong")
+        }
     }
 
     return (
         <>
-        <TopBar/>
-        <section className="page">
+            <TopBar />
+            <section className="page">
 
-            <h2>Add Recipe</h2>
-            <form onSubmit={submitRecipe}>
-            
-            <label>
-            <input
-                    type="file"
-                    className="file-input"
-                    accept="image/*"
-                    onChange={handleImageChange}
-            />
+                <h2>Add Recipe</h2>
+                <form onSubmit={submitRecipe}>
+
+                    <label>
+                        <input
+                            type="file"
+                            className="file-input"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                        />
 
             <img
                     className="image-preview"
@@ -83,16 +85,16 @@ export default function AddRecipe(recipe) {
                 />
             </label>
 
-                <label>Recipe Name</label>
-                <input 
-                    type="text" 
-                    required
-                    placeholder="Name of the recipe"
-                    value={name} 
-                    onChange={event=>setName(event.target.value)}>
-                </input>
+                    <label>Recipe Name</label>
+                    <input
+                        type="text"
+                        required
+                        placeholder="Name of the recipe"
+                        value={name}
+                        onChange={event => setName(event.target.value)}>
+                    </input>
 
-                {/* /* <label>Serving Size</label>
+                    {/* /* <label>Serving Size</label>
                 <div className=""></div>
                 <input 
                     type="button" 
@@ -109,11 +111,12 @@ export default function AddRecipe(recipe) {
                     value={instructions} 
                     onChange={event=>setInstructions(event.target.value)}>
                 </input> */}
-  
-                <p className="text-error">{errorMessage}</p>
-                <button>Add Recipe</button> 
-            </form>
-        </section>
-        <NavBar/>
+
+                    <p className="text-error">{errorMessage}</p>
+                    <button>Add Recipe</button>
+                </form>
+            </section>
+            <NavBar />
         </>
-    )};
+    )
+};
